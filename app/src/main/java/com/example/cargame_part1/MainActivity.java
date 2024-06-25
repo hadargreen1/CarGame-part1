@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
                         findViewById(R.id.main_IMG_test3)}
         };
 
-        // buttons
+
         movementButtonGlob = new ImageButton[]{
                 findViewById(R.id.main_FBTN_left),
                 findViewById(R.id.main_FBTN_right)};
 
-        // student image
+
         main_IMG_car = new ShapeableImageView[]{
                 findViewById(R.id.car_1st_lane),
                 findViewById(R.id.car_2nd_lane),
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // refreshes
+
     private void refreshUI() {
         gameManager.refresh();
         if (gameManager.hit) {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playerMove() {
-        // left move
+
         movementButtonGlob[0].setOnClickListener(view0 -> {
             if (main_IMG_car[1].isShown()) {
                 main_IMG_car[0].setVisibility(View.VISIBLE);
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 gameManager.setPlayerPlace(1);
             }
         });
-        // right move
+
         movementButtonGlob[1].setOnClickListener(view1 -> {
             if (main_IMG_car[0].isShown()) {
                 main_IMG_car[0].setVisibility(View.INVISIBLE);
