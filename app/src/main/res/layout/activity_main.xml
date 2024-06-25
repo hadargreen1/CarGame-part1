@@ -204,32 +204,32 @@
     <LinearLayout
         android:id="@+id/student_layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:layout_above="@+id/btm_Layout"
         android:layout_marginHorizontal="10dp"
         android:orientation="horizontal">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/main_IMG_student1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/car_1st_lane"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:visibility="invisible"
             app:srcCompat="@drawable/car" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/main_IMG_student2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/car_2nd_lane"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/car" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/main_IMG_student3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/car_3rd_lane"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:visibility="invisible"
@@ -244,6 +244,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_marginBottom="17dp">
 
 
@@ -251,7 +253,7 @@
             android:id="@+id/main_FBTN_left"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/left_arrow"
+            android:background="@drawable/left_img_arrow"
             android:scaleType="centerCrop"
             android:contentDescription="@string/left_arrow_desc" />
 
@@ -263,8 +265,9 @@
             android:id="@+id/main_FBTN_right"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/right_arrow"
-            android:scaleType="centerCrop">
+            android:background="@drawable/right_img_arrow"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/right_arrow_desc">
 
         </ImageButton>
     </androidx.appcompat.widget.LinearLayoutCompat>

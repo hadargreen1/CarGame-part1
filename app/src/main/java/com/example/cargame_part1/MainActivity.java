@@ -18,7 +18,9 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ShapeableImageView gameMat[][];
+    private static final String TAG = "MainActivity";
+
+    private ShapeableImageView[][] gameMat;
     private ImageButton[] movementButtonGlob; // buttons for right and left
     private ShapeableImageView main_IMG_background;
     private ShapeableImageView[] main_IMG_hearts; // life in the game
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("MainActivity", "onCreate: Activity Created");
+        Log.d(TAG, "onCreate: Activity Created");
 
         findView();
         gameManager = new GameManager();
@@ -48,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void findView() {
         main_IMG_background = findViewById(R.id.board_IMG_background);
-        Log.d("MainActivity", "findView: Background ImageView found");
+        Log.d(TAG, "findView: Background ImageView found");
 
         // hearts
         main_IMG_hearts = new ShapeableImageView[]{
                 findViewById(R.id.main_IMG_heart1),
                 findViewById(R.id.main_IMG_heart2),
                 findViewById(R.id.main_IMG_heart3)};
-        Log.d("MainActivity", "findView: Heart ImageViews found");
+        Log.d(TAG, "findView: Heart ImageViews found");
 
         // the falling tests
         main_IMG_obstacles = new ShapeableImageView[][]{
@@ -65,34 +67,34 @@ public class MainActivity extends AppCompatActivity {
 
                 {findViewById(R.id.main_IMG_test10),
                         findViewById(R.id.main_IMG_test11),
-                        findViewById(R.id.main_IMG_test12),},
+                        findViewById(R.id.main_IMG_test12)},
 
                 {findViewById(R.id.main_IMG_test7),
                         findViewById(R.id.main_IMG_test8),
-                        findViewById(R.id.main_IMG_test9),},
+                        findViewById(R.id.main_IMG_test9)},
 
                 {findViewById(R.id.main_IMG_test4),
                         findViewById(R.id.main_IMG_test5),
-                        findViewById(R.id.main_IMG_test6),},
+                        findViewById(R.id.main_IMG_test6)},
 
                 {findViewById(R.id.main_IMG_test1),
                         findViewById(R.id.main_IMG_test2),
-                        findViewById(R.id.main_IMG_test3),}
+                        findViewById(R.id.main_IMG_test3)}
         };
-        Log.d("MainActivity", "findView: Obstacle ImageViews found");
+        Log.d(TAG, "findView: Obstacle ImageViews found");
 
         // buttons
         movementButtonGlob = new ImageButton[]{
                 findViewById(R.id.main_FBTN_left),
                 findViewById(R.id.main_FBTN_right)};
-        Log.d("MainActivity", "findView: Movement buttons found");
+        Log.d(TAG, "findView: Movement buttons found");
 
         // student image
         main_IMG_student = new ShapeableImageView[]{
-                findViewById(R.id.main_IMG_student1),
-                findViewById(R.id.main_IMG_student2),
-                findViewById(R.id.main_IMG_student3)};
-        Log.d("MainActivity", "findView: Student ImageViews found");
+                findViewById(R.id.car_1st_lane),
+                findViewById(R.id.car_2nd_lane),
+                findViewById(R.id.car_3rd_lane)};
+        Log.d(TAG, "findView: car ImageViews found");
     }
 
     Runnable rna = new Runnable() {
@@ -104,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
     // refreshes
     private void refreshUI() {
-        Log.d("MainActivity", "refreshUI: UI refresh started");
+        Log.d(TAG, "refreshUI: UI refresh started");
         gameManager.refresh();
         if (gameManager.hit) {
-            Log.d("MainActivity", "refreshUI: Player got hit");
+            Log.d(TAG, "refreshUI: Player got hit");
             heartsStatus();
             vibrate();
             Toast.makeText(this, "You got hit!", Toast.LENGTH_SHORT).show();
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshObstacle() {
-        Log.d("MainActivity", "refreshObstacle: Refreshing obstacles");
+        Log.d(TAG, "refreshObstacle: Refreshing obstacles");
         for (int i = 0; i < gameManager.getROWS(); i++) {
             for (int j = 0; j < gameManager.getCOLS(); j++) {
                 if (gameManager.activeGame(i, j))
@@ -129,20 +131,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void heartsStatus() {
-        boolean[] hearts = gameManager.getStudentLife();
+        boolean[] hearts = gameManager.getPlayerLife();
         for (int i = 0; i < hearts.length; i++) {
             if (hearts[i])
                 main_IMG_hearts[i].setVisibility(View.VISIBLE);
             else
                 main_IMG_hearts[i].setVisibility(View.INVISIBLE);
         }
-        Log.d("MainActivity", "heartsStatus: Hearts status updated");
+        Log.d(TAG, "heartsStatus: Hearts status updated");
     }
 
     public void playerMove() {
         // left move
         movementButtonGlob[0].setOnClickListener(view0 -> {
-            Log.d("MainActivity", "playerMove: Left button clicked");
+            Log.d(TAG, "playerMove: Left button clicked");
             if (main_IMG_student[1].isShown()) {
                 main_IMG_student[0].setVisibility(View.VISIBLE);
                 main_IMG_student[1].setVisibility(View.INVISIBLE);
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         });
         // right move
         movementButtonGlob[1].setOnClickListener(view1 -> {
-            Log.d("MainActivity", "playerMove: Right button clicked");
+            Log.d(TAG, "playerMove: Right button clicked");
             if (main_IMG_student[0].isShown()) {
                 main_IMG_student[0].setVisibility(View.INVISIBLE);
                 main_IMG_student[1].setVisibility(View.VISIBLE);
@@ -174,17 +176,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void timer() {
         handler.postDelayed(rna, DELAY);
-        Log.d("MainActivity", "timer: Timer started");
+        Log.d(TAG, "timer: Timer started");
     }
 
     private void timerStop() {
         handler.removeCallbacks(rna);
-        Log.d("MainActivity", "timerStop: Timer stopped");
+        Log.d(TAG, "timerStop: Timer stopped");
     }
 
     private void vibrate() {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(VibrationEffect.createOneShot(vibrateTime, VibrationEffect.DEFAULT_AMPLITUDE));
-        Log.d("MainActivity", "vibrate: Vibration triggered");
+        Log.d(TAG, "vibrate: Vibration triggered");
     }
 }

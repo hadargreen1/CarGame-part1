@@ -1,15 +1,16 @@
 package com.example.cargame_part1;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class GameManager {
     public static final int ROWS = 5, COLS = 3, START_LIVE=3;
     private int hitPoint, currentLive=START_LIVE,playerPlace;
     public boolean hit;
-    private boolean[] studentLife;
+    private boolean[] playerLife;
     public boolean[][] gameMat;
 
-// constractur
+
     public GameManager() {
         gameMat = new boolean[ROWS][COLS];
         initHearts();
@@ -18,18 +19,18 @@ public class GameManager {
 
 
 
-// getters setters
+
     public void setHit(boolean hit) {
     this.hit = hit;
 }
-    public boolean[] getStudentLife() {
-        return studentLife;
+    public boolean[] getPlayerLife() {
+        return playerLife;
     }
     public void setPlayerPlace(int playerPlace) {
         this.playerPlace = playerPlace;
     }
 
-    // get rows and cols so i can use them in the main activity
+
     public  int getROWS() {
         return ROWS;
     }
@@ -39,14 +40,13 @@ public class GameManager {
 
 
 
-//  all the game manager responsabilities
+
     public boolean activeGame(int row,int col) {
         return gameMat[row][col];
     }
     public void initHearts(){
-        studentLife=new boolean[START_LIVE];
-        for(int i=0;i< studentLife.length;i++)
-            studentLife[i]=true;
+        playerLife =new boolean[START_LIVE];
+        Arrays.fill(playerLife, true);
     }
     public void addNewObs(){
         int col =getRandomLocation();
@@ -65,8 +65,8 @@ public class GameManager {
                         if (currentLive == 0)
                             currentLive = START_LIVE;
                         gotHit();
-                        studentLife[currentLive]=false;
-                        if(!studentLife[0])
+                        playerLife[currentLive]=false;
+                        if(!playerLife[0])
                             initHearts();
                     }
                 }else if(i != endRow){
