@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton[] movementButtonGlob; // buttons for right and left
     private ShapeableImageView[] main_IMG_hearts; // life in the game
     private ShapeableImageView[][] main_IMG_obstacles; // falling tests
-    private ShapeableImageView[] main_IMG_student; // player images
+    private ShapeableImageView[] main_IMG_car; // player images
 
     private static final int DELAY = 1000;
     private static final long vibrateTime = 1000;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.main_FBTN_right)};
 
         // student image
-        main_IMG_student = new ShapeableImageView[]{
+        main_IMG_car = new ShapeableImageView[]{
                 findViewById(R.id.car_1st_lane),
                 findViewById(R.id.car_2nd_lane),
                 findViewById(R.id.car_3rd_lane)};
@@ -124,29 +124,29 @@ public class MainActivity extends AppCompatActivity {
     public void playerMove() {
         // left move
         movementButtonGlob[0].setOnClickListener(view0 -> {
-            if (main_IMG_student[1].isShown()) {
-                main_IMG_student[0].setVisibility(View.VISIBLE);
-                main_IMG_student[1].setVisibility(View.INVISIBLE);
-                main_IMG_student[2].setVisibility(View.INVISIBLE);
+            if (main_IMG_car[1].isShown()) {
+                main_IMG_car[0].setVisibility(View.VISIBLE);
+                main_IMG_car[1].setVisibility(View.INVISIBLE);
+                main_IMG_car[2].setVisibility(View.INVISIBLE);
                 gameManager.setPlayerPlace(0);
-            } else if (main_IMG_student[2].isShown()) {
-                main_IMG_student[0].setVisibility(View.INVISIBLE);
-                main_IMG_student[1].setVisibility(View.VISIBLE);
-                main_IMG_student[2].setVisibility(View.INVISIBLE);
+            } else if (main_IMG_car[2].isShown()) {
+                main_IMG_car[0].setVisibility(View.INVISIBLE);
+                main_IMG_car[1].setVisibility(View.VISIBLE);
+                main_IMG_car[2].setVisibility(View.INVISIBLE);
                 gameManager.setPlayerPlace(1);
             }
         });
         // right move
         movementButtonGlob[1].setOnClickListener(view1 -> {
-            if (main_IMG_student[0].isShown()) {
-                main_IMG_student[0].setVisibility(View.INVISIBLE);
-                main_IMG_student[1].setVisibility(View.VISIBLE);
-                main_IMG_student[2].setVisibility(View.INVISIBLE);
+            if (main_IMG_car[0].isShown()) {
+                main_IMG_car[0].setVisibility(View.INVISIBLE);
+                main_IMG_car[1].setVisibility(View.VISIBLE);
+                main_IMG_car[2].setVisibility(View.INVISIBLE);
                 gameManager.setPlayerPlace(1);
-            } else if (main_IMG_student[1].isShown()) {
-                main_IMG_student[0].setVisibility(View.INVISIBLE);
-                main_IMG_student[1].setVisibility(View.INVISIBLE);
-                main_IMG_student[2].setVisibility(View.VISIBLE);
+            } else if (main_IMG_car[1].isShown()) {
+                main_IMG_car[0].setVisibility(View.INVISIBLE);
+                main_IMG_car[1].setVisibility(View.INVISIBLE);
+                main_IMG_car[2].setVisibility(View.VISIBLE);
                 gameManager.setPlayerPlace(2);
             }
         });
