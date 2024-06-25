@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CarGame-part1</string>
+<string name="left_arrow_desc">Move left</string>
+<string name="right_arrow_desc">Move right</string>
+</resources>
